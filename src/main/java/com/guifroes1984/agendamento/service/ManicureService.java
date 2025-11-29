@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.guifroes1984.agendamento.dto.ManicureDTO;
 import com.guifroes1984.agendamento.entity.Manicure;
+import com.guifroes1984.agendamento.exception.RecursoNaoEncontradoException;
 import com.guifroes1984.agendamento.repository.ManicureRepository;
 
 @Service
@@ -22,7 +23,7 @@ public class ManicureService {
 
 	public ManicureDTO findById(Long id) {
 		Manicure manicure = manicureRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Manicure não encontrada"));
+				.orElseThrow(() -> new RecursoNaoEncontradoException("Manicure não encontrada"));
 		return toDTO(manicure);
 	}
 
