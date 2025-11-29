@@ -27,7 +27,7 @@ public class AgendamentoService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	public List<AgendamentoDTO> findAll() {
+	public List<AgendamentoDTO> buscarTudo() {
 		return agendamentoRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
@@ -42,7 +42,7 @@ public class AgendamentoService {
 		return toDTO(agendamento);
 	}
 
-	public AgendamentoDTO create(AgendamentoDTO agendamentoDTO) {
+	public AgendamentoDTO criar(AgendamentoDTO agendamentoDTO) {
 		// Verificar se já existe agendamento para a mesma manicure no mesmo horário
 		List<Agendamento> agendamentosExistentes = agendamentoRepository
 				.findByManicureAndDataHora(agendamentoDTO.getManicureId(), agendamentoDTO.getDataHora());

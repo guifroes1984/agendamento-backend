@@ -16,7 +16,7 @@ public class ManicureService {
 	@Autowired
 	private ManicureRepository manicureRepository;
 
-	public List<ManicureDTO> findAll() {
+	public List<ManicureDTO> buscarTudo() {
 		return manicureRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
@@ -26,7 +26,7 @@ public class ManicureService {
 		return toDTO(manicure);
 	}
 
-	public ManicureDTO create(ManicureDTO manicureDTO) {
+	public ManicureDTO criar(ManicureDTO manicureDTO) {
 		if (manicureRepository.existsByEmail(manicureDTO.getEmail())) {
 			throw new RuntimeException("Email já cadastrado");
 		}
@@ -39,7 +39,7 @@ public class ManicureService {
 		return toDTO(manicureRepository.save(manicure));
 	}
 
-	public ManicureDTO update(Long id, ManicureDTO manicureDTO) {
+	public ManicureDTO atualizar(Long id, ManicureDTO manicureDTO) {
 		Manicure manicure = manicureRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Manicure não encontrada"));
 
@@ -50,7 +50,7 @@ public class ManicureService {
 		return toDTO(manicureRepository.save(manicure));
 	}
 
-	public void delete(Long id) {
+	public void deletar(Long id) {
 		manicureRepository.deleteById(id);
 	}
 

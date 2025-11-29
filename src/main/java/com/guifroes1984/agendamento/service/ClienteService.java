@@ -16,7 +16,7 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	public List<ClienteDTO> findAll() {
+	public List<ClienteDTO> buscarTudo() {
 		return clienteRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
@@ -26,7 +26,7 @@ public class ClienteService {
 		return toDTO(cliente);
 	}
 
-	public ClienteDTO create(ClienteDTO clienteDTO) {
+	public ClienteDTO criar(ClienteDTO clienteDTO) {
 		Cliente cliente = new Cliente();
 		cliente.setNome(clienteDTO.getNome());
 		cliente.setTelefone(clienteDTO.getTelefone());
@@ -34,7 +34,7 @@ public class ClienteService {
 		return toDTO(clienteRepository.save(cliente));
 	}
 
-	public ClienteDTO update(Long id, ClienteDTO clienteDTO) {
+	public ClienteDTO atualizar(Long id, ClienteDTO clienteDTO) {
 		Cliente cliente = clienteRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
@@ -44,7 +44,7 @@ public class ClienteService {
 		return toDTO(clienteRepository.save(cliente));
 	}
 
-	public void delete(Long id) {
+	public void deletar(Long id) {
 		clienteRepository.deleteById(id);
 	}
 
